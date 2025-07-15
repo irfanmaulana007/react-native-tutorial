@@ -3,10 +3,11 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import 'react-native-reanimated';
 
+import { CustomSplashScreen } from '~/components/custom-splash-screen';
 import { useColorScheme } from '~/hooks/useColorScheme';
 
 // Keep the splash screen visible while we fetch resources
@@ -17,29 +18,35 @@ export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+  const [showSplash, setShowSplash] = useState(true);
 
-  // Expose a function to hide the splash screen
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded || fontError) {
-      // Hide the splash screen after the fonts have loaded (or an error occurred)
-      // await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, fontError]);
-
+  // Hide the native splash screen as soon as fonts are loaded
   useEffect(() => {
-    // Attempt to hide splash screen when fonts are loaded or there's an error
     if (fontsLoaded || fontError) {
-      // SplashScreen.hideAsync();
+      // Hide the native splash screen
+      SplashScreen.hideAsync().catch(() => {
+        // Ignore errors
+      });
     }
   }, [fontsLoaded, fontError]);
+
+  // Handle custom splash screen animation completion
+  const handleAnimationComplete = useCallback(() => {
+    setShowSplash(false);
+  }, []);
 
   if (!fontsLoaded && !fontError) {
     // Async font loading only occurs in development.
     return null;
   }
 
+  // Show our custom splash screen
+  if (showSplash) {
+    return <CustomSplashScreen onAnimationComplete={handleAnimationComplete} />;
+  }
+
   return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+    <View style={{ flex: 1 }}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
