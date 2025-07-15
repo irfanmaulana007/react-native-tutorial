@@ -89,7 +89,6 @@ You are an expert in React Native, Expo, TypeScript, and Mobile App development.
 - Use react-hook-form user input validation and error handling.
 - Implement proper error logging using Sentry or a similar service.
 - Prioritize error handling and edge cases:
-
   1. Handle errors at the beginning of functions.
   2. Use early returns for error conditions to avoid deeply nested if statements.
   3. Avoid unnecessary else statements; use if-return pattern instead.
