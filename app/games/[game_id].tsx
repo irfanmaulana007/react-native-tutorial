@@ -34,7 +34,7 @@ export default function GameDetailScreen() {
 
         {/* Floating back button */}
         <TouchableOpacity style={styles.backButton} onPress={handleGoBack} activeOpacity={0.8}>
-          <FontAwesome name="arrow-left" size={16} color="#FFFFFF" />
+          <FontAwesome name="arrow-left" size={14} color="#FFFFFF" />
         </TouchableOpacity>
       </SafeAreaView>
     </>
@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
   backButton: {
     position: 'absolute',
     top: 40,
-    left: 16,
-    width: 40,
-    height: 40,
+    left: 0,
+    width: 32,
+    height: 32,
     borderRadius: 20,
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
     justifyContent: 'center',
