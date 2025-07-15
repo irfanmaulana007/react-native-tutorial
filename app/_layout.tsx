@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import 'react-native-reanimated';
 
-import { CustomSplashScreen } from '~/components/custom-splash-screen';
+import { CustomSplashScreen } from '~/components/CustomSplashScreen';
 import { useColorScheme } from '~/hooks/useColorScheme';
 
 // Keep the splash screen visible while we fetch resources

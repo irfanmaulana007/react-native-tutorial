@@ -1,5 +1,4 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Image } from 'expo-image';
 import { useCallback, useMemo } from 'react';
 import {
   Dimensions,
@@ -15,59 +14,15 @@ import {
 
 import { router } from 'expo-router';
 import AvatarPlaceholder from '~/app/avatar-placeholder';
-
-// Define game data interface
-interface Game {
-  id: string;
-  name: string;
-  genre: string[];
-  thumbnail: any; // Using require() for local images
-}
+import GameCard from '~/components/GameCard';
+import { GAMES } from '~/constants/MockData';
 
 // Sample recently played games data
-const RECENTLY_PLAYED_GAMES: Game[] = [
-  {
-    id: '2',
-    name: 'Hide & Seek: Cat Escape!',
-    genre: ['Action', 'Arcade'],
-    thumbnail: require('~/assets/images/games/hide-and-seek-thumbnail.webp'),
-  },
-  {
-    id: '1',
-    name: 'Hamster Jump: Cake Tower',
-    genre: ['Casual', 'Arcade'],
-    thumbnail: require('~/assets/images/games/hamster-jump-thumbnail.webp'),
-  },
-  {
-    id: '7',
-    name: 'Dream Home',
-    genre: ['Action', 'Arcade'],
-    thumbnail: require('~/assets/images/games/no-thumbnail.webp'),
-  },
-  {
-    id: '8',
-    name: 'Squiddy Game',
-    genre: ['Action', 'Arcade'],
-    thumbnail: require('~/assets/images/games/no-thumbnail.webp'),
-  },
-];
-
-// Game card component
-const GameCard = ({ game, width }: { game: Game; width: number }) => {
-  return (
-    <View style={[styles.gameCard, { width }]}>
-      <Image source={game.thumbnail} style={styles.thumbnail} contentFit="cover" />
-      <View style={styles.gameInfo}>
-        <Text style={styles.gameName}>{game.name}</Text>
-        <Text style={styles.gameGenre}>{game.genre.join(' · ')}</Text>
-      </View>
-    </View>
-  );
-};
+const RECENTLY_PLAYED_GAMES = [...GAMES].sort(() => Math.random() - 0.5).slice(0, 4);
 
 export default function ProfileHubScreen() {
   const { width } = Dimensions.get('window');
-  
+
   // Navigate to settings page
   const navigateToSettings = useCallback(() => {
     router.push('/settings');
@@ -81,12 +36,10 @@ export default function ProfileHubScreen() {
     return (width - padding * 2 - gap * (numColumns - 1)) / numColumns;
   }, [width]);
 
-
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" backgroundColor="#000000" />
-      
+
       <ScrollView style={styles.scrollView}>
         {/* Profile header */}
         <View style={styles.profileHeaderContainer}>
@@ -101,11 +54,11 @@ export default function ProfileHubScreen() {
             <FontAwesome name="gear" size={22} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
-        
+
         {/* Recently played section */}
         <View style={styles.recentlyPlayedContainer}>
           <Text style={styles.sectionTitle}>Recently Played</Text>
-          
+
           <FlatList
             data={RECENTLY_PLAYED_GAMES}
             renderItem={({ item }) => <GameCard game={item} width={itemWidth} />}
@@ -130,7 +83,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000000',
   },
-
   settingsButton: {
     padding: 8,
   },
@@ -171,34 +123,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFFFFF',
     marginBottom: 16,
-  },
-  gameCard: {
-    flex: 1,
-    backgroundColor: '#121212',
-    borderRadius: 12,
-    overflow: 'hidden',
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-  },
-  thumbnail: {
-    width: '100%',
-    aspectRatio: 2 / 3,
-    backgroundColor: '#333333',
-  },
-  gameInfo: {
-    padding: 12,
-  },
-  gameName: {
-    fontSize: 14,
-    fontWeight: 'medium',
-    color: '#F5F5F5',
-    marginBottom: 4,
-  },
-  gameGenre: {
-    fontSize: 10,
-    color: '#7C7E81',
   },
 });
