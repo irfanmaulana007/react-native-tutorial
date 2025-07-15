@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import Animated, {
-    Easing,
-    useAnimatedStyle,
-    useSharedValue,
-    withDelay,
-    withSequence,
-    withTiming,
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withSequence,
+  withTiming,
 } from 'react-native-reanimated';
 import { useColorScheme } from '~/hooks/useColorScheme';
 
@@ -24,25 +24,25 @@ export function CustomSplashScreen({ onAnimationComplete }: CustomSplashScreenPr
   useEffect(() => {
     // Logo animation
     opacity.value = withTiming(1, { duration: 800, easing: Easing.out(Easing.ease) });
-    
+
     scale.value = withSequence(
       withTiming(1.1, { duration: 800, easing: Easing.out(Easing.ease) }),
-      withTiming(1, { duration: 300, easing: Easing.inOut(Easing.ease) })
+      withTiming(1, { duration: 300, easing: Easing.inOut(Easing.ease) }),
     );
 
     // Text animation
     textOpacity.value = withDelay(
       400,
-      withTiming(1, { duration: 800, easing: Easing.out(Easing.ease) })
+      withTiming(1, { duration: 800, easing: Easing.out(Easing.ease) }),
     );
-    
+
     // Set a timeout to ensure the animation completes and transitions to the main app
     const timer = setTimeout(() => {
       if (onAnimationComplete) {
         onAnimationComplete();
       }
     }, 2000); // 2 seconds total for the animation sequence
-    
+
     return () => clearTimeout(timer);
   }, [opacity, scale, textOpacity, onAnimationComplete]);
 

@@ -42,7 +42,7 @@ function SettingsContent() {
   const goBack = useCallback(() => {
     router.back();
   }, []);
-  
+
   // Settings menu items
   const menuItems: MenuItem[] = [
     { id: 'country', title: 'Country', value: 'Indonesia', onPress: () => {} },
@@ -54,7 +54,7 @@ function SettingsContent() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" backgroundColor="#000000" />
-      
+
       {/* Header with back button */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={goBack}>
@@ -63,7 +63,7 @@ function SettingsContent() {
         <Text style={styles.headerTitle}>Account Settings</Text>
         <View style={{ width: 40 }} />
       </View>
-      
+
       {/* Settings items */}
       <View style={styles.settingsContainer}>
         {menuItems.map(item => (
