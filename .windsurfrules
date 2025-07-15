@@ -1,0 +1,124 @@
+You are an expert in React Native, Expo, TypeScript, and Mobile App development.
+
+# AI Agent
+
+- This is an Expo project, never write anything under `android/` and `ios/`. The only way to make change on native side is through `app.json` file.
+
+# Code Style and Structure
+
+- Do not delete any existing comments on the code.
+- Use NPM if package-lock.json exists.
+- Do not use Yarn ever, I prefer NPM.
+- For dependency install, always use `npx expo install xxx` and not `npm install xxx`. Also, uninstall with `npx expo uninstall xxx`.
+- Write concise, technical TypeScript code with accurate examples.
+- Use functional and declarative programming patterns; avoid classes.
+- Prefer iteration and modularization over code duplication.
+- Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
+- Structure files: exported component, subcomponents, helpers, static content, types.
+- Follow Expo's official documentation for setting up and configuring your projects: https://docs.expo.dev/
+- Don't do `../../xxx`, instead do `~/xxx` for imports.
+
+# Naming Conventions
+
+- For every folder and file under `app/` directory, always use lowercase with dashes. For example: `app/my-profile.tsx`, `app/my-config/settings.tsx`.
+- Use lowercase with dashes for directories (e.g., components/auth-wizard).
+- Favor named exports for components.
+- Use snake_case for dynamic variable.
+- Use UPPERCASE for constant/static variable.
+
+# TypeScript Best Practices
+
+- Use TypeScript for all code; prefer interfaces over types.
+- Avoid any and enums; use explicit types and maps instead.
+- Use functional components with TypeScript interfaces.
+- Enable strict mode in TypeScript for better type safety.
+
+# Syntax & Formatting
+
+- Use the function keyword for pure functions.
+- Avoid unnecessary curly braces in conditionals; use concise syntax for simple statements.
+- Use declarative JSX.
+- Use Prettier for consistent code formatting.
+
+# Styling & UI
+
+- Use Expo's built-in components for common UI patterns and layouts.
+- Implement responsive design with Flexbox and useWindowDimensions.
+- Use styled-components or Tailwind CSS for styling.
+- Implement dark mode support using Expo's useColorScheme.
+- Ensure high accessibility (a11y) standards using ARIA roles and native accessibility props.
+- Use react-native-reanimated and react-native-gesture-handler for performant animations and gestures.
+
+# Safe Area Management
+
+- Use SafeAreaProvider from react-native-safe-area-context to manage safe areas globally in your app.
+- Wrap top-level components with SafeAreaView to handle notches, status bars, and other screen insets on both iOS and Android.
+- Use SafeAreaScrollView for scrollable content to ensure it respects safe area boundaries.
+- Avoid hardcoding padding or margins for safe areas; rely on SafeAreaView and context hooks.
+
+# Performance Optimization
+
+- Minimize the use of useState and useEffect; prefer Zustand for state management.
+- Use Expo's AppLoading and SplashScreen for optimized app startup experience.
+- Optimize images: use WebP format where supported, include size data, implement lazy loading with expo-image.
+- Implement code splitting and lazy loading for non-critical components with React's Suspense and dynamic imports.
+- Profile and monitor performance using React Native's built-in tools and Expo's debugging features.
+- Avoid unnecessary re-renders by memoizing components and using useMemo and useCallback hooks appropriately.
+- Use react-hook-form for user input / form.
+
+# Navigation
+
+- Use Expo Router for routing and navigation; follow its best practices.
+- Leverage deep linking and universal links for better user engagement and navigation flow.
+- Use dynamic routes with expo-router for better navigation handling.
+
+# Network
+
+- Use Axios for http requests, combine it with tanstack-query.
+- Leverage tanstack-query for data fetching and caching; avoid excessive API calls.
+
+# State Management
+
+- Use Zustand for managing global state.
+- For complex state management, also use Zustand.
+- For persisting non-sensitive data, use zustand/middleware: https://zustand.docs.pmnd.rs/integrations/persisting-store-data
+- Handle URL search parameters using libraries like expo-linking.
+
+# Error Handling and Validation
+
+- Use react-hook-form user input validation and error handling.
+- Implement proper error logging using Sentry or a similar service.
+- Prioritize error handling and edge cases:
+
+  1. Handle errors at the beginning of functions.
+  2. Use early returns for error conditions to avoid deeply nested if statements.
+  3. Avoid unnecessary else statements; use if-return pattern instead.
+  4. Implement global error boundaries to catch and handle unexpected errors.
+
+# Security
+
+- Sanitize user inputs to prevent XSS attacks.
+- Use expo-secure-store for secure storage of sensitive data: https://docs.expo.dev/versions/latest/sdk/securestore
+- Ensure secure communication with APIs using HTTPS and proper authentication.
+
+# Internationalization (i18n)
+
+- Use react-native-i18n or expo-localization for internationalization and localization.
+- Support multiple languages and RTL layouts.
+- Ensure text scaling and font adjustments for accessibility.
+
+# Key Conventions
+
+- Rely on Expo's managed workflow for streamlined development and deployment.
+- Prioritize Mobile Web Vitals (Load Time, Jank, and Responsiveness).
+- Use expo-constants for managing environment variables and configuration.
+- Use expo-permissions to handle device permissions gracefully.
+- Implement expo-updates for over-the-air (OTA) updates.
+- Follow Expo's best practices for app deployment and publishing: https://docs.expo.dev/distribution/introduction
+- Ensure compatibility with iOS and Android by testing extensively on both platforms.
+
+# API Documentation
+
+- Use Expo's official documentation for setting up and configuring your projects: https://docs.expo.dev/
+
+Refer to Expo's documentation for detailed information on Views, Blueprints, and Extensions for best practices.
